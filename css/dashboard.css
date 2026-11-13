@@ -1,0 +1,68 @@
+
+/* =====================================
+   DASHBOARD QC PACKING HOUSE
+===================================== */
+
+/* Area grafik */
+
+.chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 330px;
+  padding: 5px 8px 0;
+}
+
+.chart-panel {
+  min-width: 0;
+}
+
+/* Judul panel grafik */
+
+.chart-panel .panel-heading {
+  min-height: 38px;
+}
+
+/* Tampilan grafik pada dashboard */
+
+.chart-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Jarak antar grafik */
+
+.page-content > .chart-panel + .chart-panel {
+  margin-top: 24px;
+}
+
+/* Tampilan tablet */
+
+@media (max-width: 900px) {
+  .chart-wrap {
+    height: 290px;
+  }
+}
+
+/* Tampilan HP */
+
+@media (max-width: 600px) {
+  .chart-wrap {
+    height: 250px;
+    padding: 0;
+  }
+
+  .chart-panel {
+    padding: 16px 12px;
+    border-radius: 12px;
+  }
+
+  .chart-panel .panel-heading {
+    gap: 9px;
+  }
+
+  .chart-legend {
+    width: 100%;
+    margin-left: 45px;
+    margin-top: -4px;
+  }
+}

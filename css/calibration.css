@@ -1,0 +1,228 @@
+
+/* =========================================
+   CALIBRATION PAGE
+========================================= */
+
+.calibration-section {
+  background: #fff;
+  border: 1px solid #e5ebe6;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 3px 12px rgba(25,55,35,.035);
+}
+
+.calibration-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.calibration-heading h2 {
+  color: #173f2a;
+  font-size: 18px;
+}
+
+.add-button {
+  background: #267347;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.add-button:hover {
+  background: #173f2a;
+}
+
+.calibration-form {
+  background: #f7faf7;
+  border: 1px solid #e5ebe6;
+  border-radius: 11px;
+  padding: 18px;
+  margin-bottom: 22px;
+}
+
+.calibration-form.hidden {
+  display: none;
+}
+
+.form-top {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 150px;
+}
+
+.form-field label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.ph-filter {
+  border: 1px solid #dce5de;
+  background: white;
+  padding: 10px;
+  border-radius: 7px;
+  outline: none;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.ph-filter:focus {
+  border-color: #267347;
+}
+
+.call-table-wrap,
+.data-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.call-table,
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.call-table th,
+.call-table td,
+.data-table th,
+.data-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid #e9eeea;
+  text-align: center;
+}
+
+.call-table th,
+.data-table th {
+  background: #f1f6f2;
+  color: #315b40;
+  font-weight: 700;
+}
+
+.call-table input {
+  width: 95px;
+  padding: 8px;
+  border: 1px solid #dce5de;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.form-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.summary-item {
+  flex: 1;
+  min-width: 110px;
+  padding: 12px;
+  background: white;
+  border: 1px solid #e5ebe6;
+  border-radius: 8px;
+}
+
+.summary-item small {
+  display: block;
+  color: #78857d;
+  margin-bottom: 5px;
+}
+
+.summary-item strong {
+  color: #173f2a;
+  font-size: 18px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 9px;
+  justify-content: flex-end;
+}
+
+.secondary-button,
+.save-button {
+  border: none;
+  border-radius: 7px;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.secondary-button {
+  background: #e9eeea;
+  color: #425148;
+}
+
+.save-button {
+  background: #267347;
+  color: white;
+}
+
+.edit-button {
+  border: none;
+  background: #e8f3eb;
+  color: #267347;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 11px;
+}
+
+.ph-filter-row {
+  margin-bottom: 18px;
+}
+
+.ph-filter {
+  min-width: 170px;
+}
+
+.table-empty {
+  padding: 25px;
+  text-align: center;
+  color: #78857d;
+  font-size: 13px;
+}
+
+.petugas-only.hidden {
+  display: none !important;
+}
+
+@media (max-width: 650px) {
+  .calibration-section {
+    padding: 15px;
+  }
+
+  .calibration-heading h2 {
+    font-size: 16px;
+  }
+
+  .add-button {
+    padding: 9px 10px;
+  }
+
+  .form-field {
+    width: 100%;
+  }
+
+  .form-field input,
+  .form-field select {
+    width: 100%;
+  }
+}
