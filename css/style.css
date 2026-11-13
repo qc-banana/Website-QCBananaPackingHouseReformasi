@@ -101,14 +101,22 @@ a {
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.13);
+  width: 45px;
+  height: 45px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 23px;
+  flex-shrink: 0;
+}
+
+.brand-mark img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  display: block;
 }
 
 .sidebar-brand strong {
@@ -560,4 +568,11 @@ a {
   .login-card {
     padding: 27px 23px;
   }
+}
+
+.brand-mark img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  display: block;
 }

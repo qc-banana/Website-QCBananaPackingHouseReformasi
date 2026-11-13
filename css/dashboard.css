@@ -66,3 +66,29 @@
     margin-top: -4px;
   }
 }
+
+/* Warna keterangan grafik Dashboard */
+
+.legend-uc,
+.legend-good,
+.legend-oc {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-left: 8px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.legend-uc {
+  background-color: #e5bd54;
+}
+
+.legend-good {
+  background-color: #267347;
+}
+
+.legend-oc {
+  background-color: #da2525;
+}

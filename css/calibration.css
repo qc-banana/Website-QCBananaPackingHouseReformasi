@@ -226,3 +226,34 @@
     width: 100%;
   }
 }
+
+
+/* =========================================
+   UKURAN GRAFIK KALIBRASI
+========================================= */
+
+#pgCalibrationChart,
+#phCalibrationChart {
+  width: 100% !important;
+  height: 400px !important;
+  max-height: 400px;
+}
+
+/* =====================================
+   BATAS TINGGI TABEL CALIBRATION
+===================================== */
+
+.table-wrap {
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
+  position: relative;
+}
+
+/* Header tabel tetap terlihat saat scroll */
+.table-wrap thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f5f7f9;
+}

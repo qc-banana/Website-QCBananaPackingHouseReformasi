@@ -240,22 +240,34 @@ function renderPGTable() {
 }
 
 function renderPHOptions() {
-  const previous = $("phFilter").value;
+  const select = $("phFilter");
+  if (!select) return;
 
-  const options = [...new Set(
-    phRecords.map((row) => row.ph)
-  )].sort((a, b) => a.localeCompare(b, "id", {
-    numeric: true
-  }));
+  // Simpan pilihan PH sebelumnya
+  const previousValue = select.value;
 
-  $("phFilter").innerHTML =
-    `<option value="">Pilih PH</option>` +
-    options.map((ph) =>
-      `<option value="${ph}">${ph}</option>`
-    ).join("");
+  // Ambil daftar PH yang tersedia
+  const phList = [
+    ...new Set(
+      phRecords
+        .map(row => String(row.ph).trim())
+        .filter(Boolean)
+    )
+  ].sort((a, b) =>
+    a.localeCompare(b, "id", { numeric: true })
+  );
 
-  if (options.includes(previous)) {
-    $("phFilter").value = previous;
+  // Tampilkan pilihan PH tanpa opsi gabungan
+  select.innerHTML = phList
+    .map(ph => `<option value="${ph}">${ph}</option>`)
+    .join("");
+
+  // Pertahankan pilihan sebelumnya jika masih tersedia.
+  // Jika belum ada pilihan, otomatis pilih PH pertama.
+  if (phList.includes(previousValue)) {
+    select.value = previousValue;
+  } else {
+    select.value = phList[0] || "";
   }
 }
 
@@ -316,14 +328,20 @@ function makeBarChart(canvasId, labels, values) {
       datasets: [
         {
           label: "UC",
-          data: values.map((v) => v.uc),
+          data: values.map((v) => Number(v.uc) || 0),
+          backgroundColor: "#e5bd54",
+          borderRadius: 5
+        },
+        {
+          label: "Good Call",
+          data: values.map((v) => Number(v.good) || 0),
           backgroundColor: "#267347",
           borderRadius: 5
         },
         {
           label: "OC",
-          data: values.map((v) => v.oc),
-          backgroundColor: "#9ac9a9",
+          data: values.map((v) => Number(v.oc) || 0),
+          backgroundColor: "#e03a3a",
           borderRadius: 5
         }
       ]
@@ -332,18 +350,41 @@ function makeBarChart(canvasId, labels, values) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: true }
+        legend: {
+          display: true,
+          position: "top"
+        },
+        tooltip: {
+          mode: "index",
+          intersect: false,
+
+          callbacks: {
+            title: (items) => items[0].label,
+
+            label: (context) =>
+              context.dataset.label + ": " +
+              Number(context.raw).toFixed(2) + "%"
+          }
+        }
       },
       scales: {
         y: {
           beginAtZero: true,
+          min: 0,
           max: 100,
           ticks: {
+            stepSize: 20,
             callback: (value) => value + "%"
+          },
+          title: {
+            display: true,
+            text: "Persentase (%)"
           }
         },
         x: {
-          grid: { display: false }
+          grid: {
+            display: false
+          }
         }
       }
     }
@@ -363,11 +404,13 @@ function renderCharts() {
     weekRows.map((row) => "Week " + row.week),
     weekRows.map((row) => ({
       uc: Number(row.uc_percent),
+      good: Number(row.good_call_percent),
       oc: Number(row.oc_percent)
     }))
   );
 
   const selectedPH = $("phFilter").value;
+
   const rows = phRecords
     .filter((row) => !selectedPH || row.ph === selectedPH)
     .sort((a, b) => a.week - b.week);
@@ -377,6 +420,7 @@ function renderCharts() {
     rows.map((row) => "Week " + row.week),
     rows.map((row) => ({
       uc: Number(row.uc_percent),
+      good: Number(row.good_call_percent),
       oc: Number(row.oc_percent)
     }))
   );

@@ -9,10 +9,10 @@ let phSummaryChart = null;
 
 // Daftar PH berdasarkan PG
 const phByPG = {
-  "PG 1": ["PH 14", "PH 12"],
-  "PG 2": ["PH 40", "PH 307"],
-  "PG 3": ["PH 520", "PH 529", "PH 533", "PH 549"],
-  "PG 4": ["PH 411", "PH 415"]
+  "PG 1": ["PH 8", "PH 12", "PH 14", "PH 40"],
+  "PG 2": ["PH 107"],
+  "PG 3": ["PH 520", "PH 529", "PH 533", "PH 541", "PH 549"],
+  "PG 4": ["PH 03", "PH 04", "PH 05"]
 };
 
 // Urutan PG
@@ -31,12 +31,17 @@ function calculateSummary(rows) {
     (sum, row) => sum + Number(row.uc_count || 0), 0
   );
 
+  const good = rows.reduce(
+    (sum, row) => sum + Number(row.good_call_count || 0), 0
+  );
+
   const oc = rows.reduce(
     (sum, row) => sum + Number(row.oc_count || 0), 0
   );
 
   return {
     uc: total ? +(uc / total * 100).toFixed(2) : 0,
+    good: total ? +(good / total * 100).toFixed(2) : 0,
     oc: total ? +(oc / total * 100).toFixed(2) : 0
   };
 }
@@ -72,6 +77,14 @@ function createSummaryChart(canvasId, labels, values) {
         {
           label: "UC",
           data: values.map(item => item.uc),
+          backgroundColor: "#e5bd54",
+          borderRadius: 5,
+          barPercentage: 0.7,
+          categoryPercentage: 0.7
+        },
+        {
+          label: "Good Call",
+          data: values.map(item => item.good),
           backgroundColor: "#267347",
           borderRadius: 5,
           barPercentage: 0.7,
@@ -80,7 +93,7 @@ function createSummaryChart(canvasId, labels, values) {
         {
           label: "OC",
           data: values.map(item => item.oc),
-          backgroundColor: "#9ac9a9",
+          backgroundColor: "#da2525",
           borderRadius: 5,
           barPercentage: 0.7,
           categoryPercentage: 0.7
@@ -105,7 +118,7 @@ function createSummaryChart(canvasId, labels, values) {
         tooltip: {
           callbacks: {
             label: context =>
-              `${context.dataset.label}: ${context.raw}%`
+              `${context.dataset.label}: ${Number(context.raw).toFixed(2)}%`
           }
         }
       },
@@ -113,9 +126,11 @@ function createSummaryChart(canvasId, labels, values) {
       scales: {
         y: {
           beginAtZero: true,
+          min: 0,
           max: 100,
 
           ticks: {
+            stepSize: 20,
             callback: value => value + "%"
           },
 
